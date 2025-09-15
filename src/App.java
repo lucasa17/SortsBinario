@@ -22,7 +22,7 @@ public static Pessoa[] vetorDePessoas() {
 
     static void mostrarVetorPessoas(Pessoa[] vetor) {
         for (Pessoa p : vetor) {
-            System.out.println(p+"\n");
+            System.out.println(p);
         }
         System.out.println("\n");
     }   
@@ -39,7 +39,6 @@ public static Pessoa[] vetorDePessoas() {
         int tamanho;
         long inicio, fim;
         Scanner leia = new Scanner(System.in);
-        
         Comparator<Pessoa> comparadorData =  (p1, p2) -> p1.getDataNascimento().compareTo(p2.getDataNascimento());
         Comparator<Pessoa> comparadorNomeDataNascimento =  (p1, p2) -> {
             int cmp = p1.getNome().compareTo(p2.getNome());
@@ -48,43 +47,36 @@ public static Pessoa[] vetorDePessoas() {
             }
             return cmp;
         };
+
         // Bubble Sort
         Pessoa[] vetorBubble = vetorDePessoas();
         BubbleSort bubbleSort = new BubbleSort();
-        bubbleSort.sort(vetorBubble, comparadorData);
-        
+        bubbleSort.sort(vetorBubble);
         mostrarVetorPessoas(vetorBubble);
-        System.out.println("Entre com o nome e data de nascimento: ");
+        System.out.println("Entre com o nome e data nascimento");
         String nome = leia.nextLine();
         LocalDate data = LocalDate.parse(leia.nextLine());
-        
         Busca<Pessoa> busca = new Busca<>();
         Pessoa pessoa = new Pessoa(nome, data);
-        System.out.println("Buscar por nome[1] ou data de nascimento[2]: ");
+        System.out.println("Buscar por nome[1] ou data nascimento[2]");
         int resp = leia.nextInt();
         int indice;
-        if(resp == 1) {
-        	indice = busca.binaria(vetorBubble, pessoa);
-        }
-        else {
-        	indice = busca.binaria(vetorBubble, pessoa, comparadorData);
-        }
+        if(resp == 1)
+            indice = busca.binaria(vetorBubble, pessoa);
+        else
+            indice = busca.binaria(vetorBubble, pessoa, comparadorData); 
+            
+        if(indice==-1)
+            System.out.println("Nao encontrado :(");
+        else
+            System.out.println("Encontrado na posicao "+ indice+ ":)");        
+
         
-        if(indice == -1) {
-        	System.out.println("Não encontrado :(");
-        }
-        else {
-        	System.out.println("Encontrado na posição: "+ indice +" :)");
-        }
-        /*
-        System.out.println("Vetor ordenado com Bubble Sort pela data de nascimento:");
-        mostrarVetorPessoas(vetorBubble);
-        bubbleSort.sort(vetorBubble);
-        System.out.println("Vetor ordenado com Bubble Sort:");
-        mostrarVetorPessoas(vetorBubble);
 
 
-        // Selection Sort
+
+
+      /*   // Selection Sort
         Pessoa[] vetorSelection = vetorDePessoas();
         SelectionSort selectionSort = new SelectionSort();
         selectionSort.sort(vetorSelection, comparadorData);
@@ -93,9 +85,9 @@ public static Pessoa[] vetorDePessoas() {
         selectionSort.sort(vetorSelection);
         System.out.println("Vetor ordenado com Selection Sort:");
         mostrarVetorPessoas(vetorSelection);
+        */
 
-        
-       // Quick Sort
+      /*   // Quick Sort
         Integer[] vetor = {7, 2, 9, 4, 8, 3, 6, 1};
         QuickSort<Integer> quickSort = new QuickSort<>();
         System.out.println("Vetor inicial: " + Arrays.toString(vetor));
@@ -109,8 +101,7 @@ public static Pessoa[] vetorDePessoas() {
         inicio = System.currentTimeMillis();
         insertionSort.sort(vetorInsertion);
         fim = System.currentTimeMillis();
-        System.out.println("Insertion Sort Tempo em ms:"+ (fim-inicio)  );
-        */
+        System.out.println("Insertion Sort Tempo em ms:"+ (fim-inicio)  );*/
     
     }
 }

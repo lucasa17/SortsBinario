@@ -31,4 +31,6 @@ public abstract class ObservableSort<T> {
             observer.aoConcluir(contadorComparacao, contadorTrocas);
     }
 
+    
+
 }
